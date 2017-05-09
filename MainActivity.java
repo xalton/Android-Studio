@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+
 import java.text.NumberFormat;
+
 /**
  * This app displays an order form to order coffee.
  */
@@ -26,12 +28,20 @@ public class MainActivity extends AppCompatActivity {
         quantity = quantity + 1;
         display(quantity);
     }
+
     public void decrement(View view) {
-        quantity = quantity - 1;
-        display(quantity);
-    }
+        if (quantity <= 0) {
+            quantity = 0;
+            display(quantity);
+        }
+        else{
+                quantity = quantity - 1;
+                display(quantity);
+            }
+        }
+
     public void submitOrder(View view) {
-        displayPrice(quantity*5);
+        displayPrice(quantity * 5);
     }
 
     /**
@@ -44,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
          * This method displays the given price on the screen.
          */
     }
+
     private void displayPrice(int number) {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
